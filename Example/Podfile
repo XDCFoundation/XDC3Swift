@@ -1,6 +1,9 @@
+source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 target 'XDC3Swift_Tests' do
   pod 'XDC3Swift', :path => '../'
-  
+  pod 'GenericJSON', '~> 2.0.0'
+  pod 'BigInt', '~> 5.2.0'
+  pod 'secp256k1.swift', '~> 0.1.0'
   
 end

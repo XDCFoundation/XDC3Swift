@@ -1,0 +1,6 @@
+framework module XDC3Swift {
+  umbrella header "XDC3Swift-umbrella.h"
+
+  export *
+  module * { export * }
+}
