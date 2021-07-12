@@ -77,7 +77,7 @@ We will receive one txHash which will include all data of the transaction.
 
 ## Author
 
-XinFin, XFLW@xinfin.org
+XDCFoundation, XFLW@xinfin.org
 
 ## License
 
