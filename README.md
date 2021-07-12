@@ -22,7 +22,7 @@ pod 'XDC3Swift'
 
 ## Author
 
-angshuman2611, angshuman@leewayhertz.com
+XinFin, XFLW@xinfin.org
 
 ## License
 
