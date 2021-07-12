@@ -1,0 +1,6 @@
+use_frameworks!
+target 'XDC3Swift_Tests' do
+  pod 'XDC3Swift', :path => '../'
+  
+  
+end
