@@ -1,6 +1,6 @@
 {
   "name": "XDC3Swift",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "summary": "XinFin API for swift",
   "description": "XinFin Swift API with support for smart contracts and XRC20",
   "homepage": "https://github.com/XinfinLeeway/XDC3Swift",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/XinfinLeeway/XDC3Swift.git",
-    "tag": "0.1.0"
+    "tag": "1.1.0"
   },
   "platforms": {
     "ios": "11.0"

@@ -7,34 +7,15 @@
 
 import Foundation
 import BigInt
-struct Root: Codable{
-  fileprivate let result: [Result]
-}
 
-private struct Result: Codable {
-    let id, hash: String
-    let v, blockNumber: Int
-  //  let contract: Contract
-    let from: String
-   // let method: Method
-    let timestamp: Int
-    let to, value: String
-
-    enum CodingKeys: String, CodingKey {
-        case id = "_id"
-        case hash
-        case v = "__v"
-        case blockNumber, from, timestamp, to, value
-    }
-}
 public class XRC20 {
     let client: XinfinClient
-
-    var url = URL(string: "https://explorer.apothem.network/publicAPI")
+   // var account: XinfinAccount?
     public init(client: XinfinClient) {
         self.client = client
-    }
         
+    }
+    
     public func name(tokenContract: XinfinAddress,
                      completion: @escaping((Error?, String?) -> Void)) {
         let function = XRC20Functions.name(contract: tokenContract)
@@ -88,64 +69,36 @@ public class XRC20 {
         }
     }
     
-    public func approve(tokenContract: XinfinAddress,
-                        spender: XinfinAddress,
-                        value: BigUInt,
-                        completion: @escaping((Error?, BigUInt?) -> Void)){
-        let function = XRC20Functions.approve(contract: tokenContract, spender: spender, value: value)
-        function.call(withClient: self.client, responseType: XRC20Responses.approve.self) { (error, approve) in
-            return completion(error,approve?.value)
+    public func increaseAllowance(account:XinfinAccount ,tokenAddress: XinfinAddress, owner: XinfinAddress, spender: XinfinAddress, value: BigUInt, completion: @escaping((Any?)->Void)){
+        var myVal = value
+
+        allowance(tokenContract: tokenAddress, address: owner, spender: spender) { (error, allow) in
+            myVal = allow! + myVal
+            let function = XRC20Functions.approve(contract: tokenAddress, spender: spender, value: myVal)
+            let transaction = try? function.transaction(gasPrice: 3500000, gasLimit: 3000000)
+            self.client.eth_sendRawTransaction(transaction!, withAccount: account ) { (error, txHash) in
+                return completion(txHash)
+            }
+            
         }
-        
     }
     
-    public func transferP(tokenContract: XinfinAddress,
-                        to: XinfinAddress,
-                        value: BigUInt,
-                        completion: @escaping((Error?, BigUInt?) -> Void)){
-        let function = XRC20Functions.transfer(contract: tokenContract, to: to, value: value)
-        function.call(withClient: self.client, responseType: XRC20Responses.transfer.self) { (error, approve) in
-            return completion(error,approve?.value)
+    public func decreaseAllowance(account: XinfinAccount,tokenAddress: XinfinAddress, owner: XinfinAddress, spender: XinfinAddress, value: BigUInt, completion: @escaping((Any?)->Void)){
+        var myVal = value
+
+        allowance(tokenContract: tokenAddress, address: owner, spender: spender) { (error, allow) in
+            if allow! > 0{
+                myVal = allow! - myVal
+            }
+            
+            let function = XRC20Functions.approve(contract: tokenAddress, spender: spender, value: myVal)
+            let transaction = try? function.transaction(gasPrice: 3500000, gasLimit: 3000000)
+            self.client.eth_sendRawTransaction(transaction!, withAccount: account ) { (error, txHash) in
+                return completion(txHash)
+            }
+            
         }
-        
     }
-    
-    
-    public func transferFrom(tokenContract: XinfinAddress,
-                             sender: XinfinAddress,
-                        to: XinfinAddress,
-                        value: BigUInt,
-                        completion: @escaping((Error?, BigUInt?) -> Void)){
-        let function = XRC20Functions.transferFrom(contract: tokenContract, sender: sender, to: to, value: value)
-        function.call(withClient: self.client, responseType: XRC20Responses.transferFrom.self) { (error, approve) in
-            return completion(error,approve?.value)
-        }
-        
-    }
-    
-    public func increaseAllowance(tokenContract: XinfinAddress,
-                             sender: XinfinAddress,
-                        value: BigUInt,
-                        completion: @escaping((Error?, BigUInt?) -> Void)){
-        let function = XRC20Functions.increaseAllowance(contract: tokenContract, sender: sender, value: value)
-        function.call(withClient: self.client, responseType: XRC20Responses.increaseAllowance.self) { (error, approve) in
-            return completion(error,approve?.value)
-        }
-        
-    }
-    
-    public func decreaseAllowance(tokenContract: XinfinAddress,
-                             sender: XinfinAddress,
-                        value: BigUInt,
-                        completion: @escaping((Error?, BigUInt?) -> Void)){
-        let function = XRC20Functions.decreaseAllowance(contract: tokenContract, sender: sender, value: value)
-        function.call(withClient: self.client, responseType: XRC20Responses.decreaseAllowance.self) { (error, approve) in
-            return completion(error,approve?.value)
-        }
-        
-    }
-    
-    
     public func transferEventsTo(recipient: XinfinAddress,
                                  fromBlock: XinfinBlock,
                                  toBlock: XinfinBlock,
@@ -196,51 +149,6 @@ public class XRC20 {
         }
     }
     
-    public func transfer(tokenContract: String,
-                          completion: @escaping ((Error?,Int?) -> Void)){
+   
         
-        url?.appendQueryItem(name: "action", value: "tokentransfers")
-        url?.appendQueryItem(name: "contractaddress", value:tokenContract)
-    
-    
-       // print(url!)
-        URLSession.shared.dataTask(with: url!) { (data, response, error) in
-        if error != nil{
-            print(error!)
-        }
-        
-        do{
-            let s = try JSONDecoder().decode(Root.self, from: data!)
-       //     print(s.result.count)
-            return completion(nil,s.result.count)
-        }catch{
-            print("error")
-        }
-           
-   }.resume()
-        
-        
-}
-}
-extension URL {
-
-    mutating func appendQueryItem(name: String, value: String?) {
-
-        guard var urlComponents = URLComponents(string: absoluteString) else { return }
-
-        // Create array of existing query items
-        var queryItems: [URLQueryItem] = urlComponents.queryItems ??  []
-
-        // Create query item
-        let queryItem = URLQueryItem(name: name, value: value)
-
-        // Append the new query item in the existing query items array
-        queryItems.append(queryItem)
-
-        // Append updated query items array in the url component object
-        urlComponents.queryItems = queryItems
-
-        // Returns the url from new url components
-        self = urlComponents.url!
-    }
 }

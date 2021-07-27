@@ -108,7 +108,7 @@ public class ABIEncoder {
             encoded = try encodeRaw(value == "true" ? "1":"0", forType: ABIRawType.FixedUInt(8), padded: padded)
         case .FixedAddress:
          //   print(value.web3)
-            guard let bytes = value.web3.bytesFromXDC else { throw ABIError.invalidValue } // Must be 20 bytes
+            guard let bytes = value.web3.bytesFromHex else { throw ABIError.invalidValue } // Must be 20 bytes
             if padded  {
                 encoded = [UInt8](repeating: 0x00, count: 32 - bytes.count) + bytes
             } else {
@@ -125,7 +125,7 @@ public class ABIEncoder {
             }
         case .DynamicBytes:
             // Bytes are hex encoded
-            guard let bytes = value.web3.bytesFromXDC else { throw ABIError.invalidValue }
+            guard let bytes = value.web3.bytesFromHex else { throw ABIError.invalidValue }
             let len = try encodeRaw(String(bytes.count), forType: ABIRawType.FixedUInt(256)).bytes
             let pack: Int
             if bytes.count == 0 {
@@ -141,7 +141,7 @@ public class ABIEncoder {
             }
         case .FixedBytes(_):
             // Bytes are hex encoded
-            guard let bytes = value.web3.bytesFromXDC else { throw ABIError.invalidValue }
+            guard let bytes = value.web3.bytesFromHex else { throw ABIError.invalidValue }
             if padded {
                 encoded = bytes + [UInt8](repeating: 0x00, count: 32 - bytes.count)
             } else {
@@ -149,7 +149,7 @@ public class ABIEncoder {
             }
         case .DynamicArray(let type):
             let unitSize = type.size * 2
-            let stringValue = value.web3.noxdcPrefix
+            let stringValue = value.web3.noHexPrefix //noHexPrefix
             let size = stringValue.count / unitSize
             
             let padUnits = type.isPaddedInDynamic

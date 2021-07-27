@@ -2,7 +2,7 @@ PODS:
   - BigInt (5.2.0)
   - GenericJSON (2.0.1)
   - secp256k1.swift (0.1.4)
-  - XDC3Swift (0.1.0):
+  - XDC3Swift (1.1.0):
     - BigInt (~> 5.2.0)
     - GenericJSON (~> 2.0.0)
     - secp256k1.swift (~> 0.1.0)
@@ -27,7 +27,7 @@ SPEC CHECKSUMS:
   BigInt: f668a80089607f521586bbe29513d708491ef2f7
   GenericJSON: a6e74e2c457f8693caab08e0eafde7d97e6666de
   secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
-  XDC3Swift: 6791b49b00d350d23fefbe32124f7bb81cbb87e2
+  XDC3Swift: c07662248c684bfbaeb0254b5ca861e3e4dfb1e5
 
 PODFILE CHECKSUM: 03e193850ce6a6a59030c9a0b68cf12b3464221d
 

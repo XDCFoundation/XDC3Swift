@@ -13,7 +13,7 @@ public typealias ENSRegistryResolverParameter = ENSContracts.ENSRegistryFunction
 public enum ENSContracts {
     static let RopstenAddress = XinfinAddress("0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e")
     static let MainnetAddress = XinfinAddress("0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e")
-    static let ApothemAddress = XinfinAddress("xdcef4ba943405d6b75416c9a2f0363a31b88045aad")
+    static let ApothemAddress = XinfinAddress("0xef4ba943405d6b75416c9a2f0363a31b88045aad")
     
     public static func registryAddress(for network: XinfinNetwork) -> XinfinAddress? {
         switch network {
@@ -97,7 +97,7 @@ public enum ENSContracts {
                     case .name(let ens):
                         nameHash = ENSContracts.nameHash(name: ens)
                     }
-                    return nameHash.web3.xdcData ?? Data()
+                    return nameHash.web3.hexData ?? Data()
                 }
 
                 var name: String? {

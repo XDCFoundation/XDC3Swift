@@ -62,7 +62,7 @@ class KeyUtil {
     static func generateAddress(from publicKey: Data) -> XinfinAddress {
         let hash = publicKey.web3.keccak256
         let address = hash.subdata(in: 12..<hash.count)
-        return XinfinAddress(address.web3.xdcString)
+        return XinfinAddress(address.web3.hexString)
     }
     
     static func sign(message: Data, with privateKey: Data, hashing: Bool) throws -> Data {

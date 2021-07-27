@@ -99,7 +99,7 @@ public class XinfinAccount: XinfinAccountProtocol {
     }
     
     public func sign(hash: String) throws -> Data {
-        if let data = hash.web3.xdcData {
+        if let data = hash.web3.hexData {
             return try KeyUtil.sign(message: data, with: self.privateKeyData, hashing: false)
         } else {
             throw XinfinAccountError.signError

@@ -230,7 +230,7 @@ public class XinfinClient: XinfinClientProtocol {
         concurrentQueue.addOperation {
             let group = DispatchGroup()
             group.enter()
-            
+            print("---->\(account.address)")
             // Inject latest nonce
             self.eth_getTransactionCount(address: account.address, block: .Latest) { (error, count) in
                 guard let nonce = count else {

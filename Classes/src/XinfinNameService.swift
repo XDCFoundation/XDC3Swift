@@ -38,11 +38,11 @@ public class XinfinNameService: XinfinNameServiceProtocol {
             return completion(XinfinNameServiceError.noNetwork, nil)
         }
         
-        let ensReverse = address.value.web3.noxdcPrefix + ".addr.reverse"
+        let ensReverse = address.value.web3.noHexPrefix + ".addr.reverse"
         let nameHash = Self.nameHash(name: ensReverse)
         
         let function = ENSContracts.ENSRegistryFunctions.resolver(contract: registryAddress,
-                                                                  _node: nameHash.web3.xdcData ?? Data())
+                                                                  _node: nameHash.web3.hexData ?? Data())
         guard let registryTransaction = try? function.transaction() else {
             completion(XinfinNameServiceError.invalidInput, nil)
             return
@@ -53,22 +53,22 @@ public class XinfinNameService: XinfinNameServiceProtocol {
                 return completion(XinfinNameServiceError.noResolver, nil)
             }
             
-            guard resolverData != "xdc" else {
+            guard resolverData != "0x" else {
                 return completion(XinfinNameServiceError.ensUnknown, nil)
             }
             
             let idx = resolverData.index(resolverData.endIndex, offsetBy: -40)
-            let resolverAddress = XinfinAddress(String(resolverData[idx...]).web3.withXdcPrefix)
+            let resolverAddress = XinfinAddress(String(resolverData[idx...]).web3.withHexPrefix)
             
             let function = ENSContracts.ENSResolverFunctions.name(contract: resolverAddress,
-                                                                  _node: nameHash.web3.xdcData ?? Data())
+                                                                  _node: nameHash.web3.hexData ?? Data())
             guard let addressTransaction = try? function.transaction() else {
                 completion(XinfinNameServiceError.invalidInput, nil)
                 return
             }
             
             self.client.eth_call(addressTransaction, block: .Latest, completion: { (error, data) in
-                guard let data = data, data != "xdc" else {
+                guard let data = data, data != "0x" else {
                     return completion(XinfinNameServiceError.ensUnknown, nil)
                 }
                 if let ensHex: String = try? (try? ABIDecoder.decodeData(data, types: [String.self]))?.first?.decoded() {
@@ -90,7 +90,7 @@ public class XinfinNameService: XinfinNameServiceProtocol {
         }
         let nameHash = Self.nameHash(name: ens)
         let function = ENSContracts.ENSRegistryFunctions.resolver(contract: registryAddress,
-                                                                  _node: nameHash.web3.xdcData ?? Data())
+                                                                  _node: nameHash.web3.hexData ?? Data())
         
         guard let registryTransaction = try? function.transaction() else {
             completion(XinfinNameServiceError.invalidInput, nil)
@@ -102,21 +102,21 @@ public class XinfinNameService: XinfinNameServiceProtocol {
                 return completion(XinfinNameServiceError.noResolver, nil)
             }
             
-            guard resolverData != "xdc" else {
+            guard resolverData != "0x" else {
                 return completion(XinfinNameServiceError.ensUnknown, nil)
             }
             
             let idx = resolverData.index(resolverData.endIndex, offsetBy: -40)
-            let resolverAddress = XinfinAddress(String(resolverData[idx...]).web3.withXdcPrefix)
+            let resolverAddress = XinfinAddress(String(resolverData[idx...]).web3.withHexPrefix)
             
-            let function = ENSContracts.ENSResolverFunctions.addr(contract: resolverAddress, _node: nameHash.web3.xdcData ?? Data())
+            let function = ENSContracts.ENSResolverFunctions.addr(contract: resolverAddress, _node: nameHash.web3.hexData ?? Data())
             guard let addressTransaction = try? function.transaction() else {
                 completion(XinfinNameServiceError.invalidInput, nil)
                 return
             }
             
             self.client.eth_call(addressTransaction, block: .Latest, completion: { (error, data) in
-                guard let data = data, data != "xdc" else {
+                guard let data = data, data != "0x" else {
                     return completion(XinfinNameServiceError.ensUnknown, nil)
                 }
                 
@@ -136,7 +136,7 @@ public class XinfinNameService: XinfinNameServiceProtocol {
             node.append(label.web3.keccak256)
             node = node.web3.keccak256
         }
-        return node.web3.xdcString
+        return node.web3.hexString
     }
 
 }
