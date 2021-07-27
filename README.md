@@ -75,6 +75,70 @@ client.eth_sendRawTransaction(tx, withAccount: self.account!) { (err, tx) in
  
 We will receive one txHash which will include all data of the transaction.
 
+### XRC20 Read methods
+
+Creating an instance of XRC20
+```
+let xinfinClient = XRC20.init(client: XinfinClient(url: URL(string: "rpc url")!))
+```
+
+Now, we can interact with the XRC20 read methods.
+
+name() → string Returns the name of the token.
+```
+xinfinClient.name(tokenContract: XinfinAddress("Token address")) { (err, name) in
+                print("Name of token : \(name!)")
+        }
+```        
+balanceOf(address token,address account) → uint256  Returns the amount of tokens owned by account.
+```
+xinfinClient.balanceOf(tokenContract: XinfinAddress("Token address"), account: XinfinAddress("Token Holder Address")) { (error, balanceOf) in
+               print("balance of token wned by account : \(balanceOf)")
+        }
+  }
+```
+### XRC20 Write methods
+
+For write methods, we need to create an instance of XinfinClient and we need token owner private key
+```
+let client = XinfinClient(url: URL(string: "rpc url")!)
+let account = try? XinfinAccount(keyStorage: XinfinPrivateKeyStore(privateKey: "owner private key"))
+```
+
+transfer(address token, address recipient, uint256 amount) → Moves amount tokens from the caller’s account to recipient. It will return a transaction hash.
+```
+   let function = XRC20Functions.transfer(contract: XinfinAddress("Token address"), to: XinfinAddress("reciever address"), value: BigUInt(amount))
+        let transaction = (try? function.transaction(gasPrice: 35000, gasLimit: 30000))!
+            client.eth_sendRawTransaction(transaction, withAccount: self.account!) { (error, txHash) in
+            print("TX Hash: \(txHash ?? "")")
+                tx = txHash!
+        }
+ ```       
+approve(address token, address spender, uint256 amount) → Sets amount as the allowance of spender over the caller’s tokens. It will return a transaction hash.
+
+```
+let function = XRC20Functions.approve(contract: XinfinAddress("Token address"), spender: XinfinAddress("Spender address"), value: val!)
+        let transaction = (try? function.transaction(gasPrice: 35000, gasLimit: 30000))!
+            self.client.eth_sendRawTransaction(transaction, withAccount: self.account!) { (error, txHash) in
+            print("TX Hash: \(txHash ?? "")")   
+}
+``` 
+
+For increaseAllowance and decreaseAllowance we need an instance of XRC20 and private key of owner: 
+ 
+decreaseAllowance(XifninAccount account, address token, address owner, address spender, uint256 subtractedValue)
+Automically decreases the allowance granted to spender by the caller.
+
+This is an alternative to approve.
+
+Emits an Approval event indicating the updated allowance.
+
+```
+xinfinClient.increaseAllowance(account: self.account!, tokenAddress: XinfinAddress("Token Address"), owner: XinfinAddress("Owner address"), spender: XinfinAddress("Spender address"), value: BigUInt(value), completion: { (txHash) in
+            print(txHash!)
+    })
+```    
+
 ## Author
 
 XDCFoundation, XFLW@xinfin.org
