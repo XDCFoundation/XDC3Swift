@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '11.0'
 
   s.swift_version = '5.0'
-  s.source_files = 'Classes/src/**/*.swift', 'Classes/lib/**/*.{c,h}'
+  s.source_files = 'Classes/src/**/*.swift', 'Classes/lib/**/*.{c,h}', 'Classes/src/XRC20/*.swift', 'Classes/src/XRC721/*.swift', 'Classes/src/Account/*.swift', 'Classes/src/Client/*.swift','Classes/src/Contract/*.swift', 'Classes/src/ENS/*.swift', 'Classes/src/Extensions/*.swift', 'Classes/src/Multicall/*.swift', 'Classes/src/XDCUtils/*.swift'
    s.pod_target_xcconfig = {
      'SWIFT_INCLUDE_PATHS[sdk=iphonesimulator*]' => '$(PODS_TARGET_SRCROOT)/Classes/lib/**',
      'SWIFT_INCLUDE_PATHS[sdk=iphoneos*]' => '$(PODS_TARGET_SRCROOT)/Classes/lib/**'

@@ -21,7 +21,16 @@
   "swift_versions": "5.0",
   "source_files": [
     "Classes/src/**/*.swift",
-    "Classes/lib/**/*.{c,h}"
+    "Classes/lib/**/*.{c,h}",
+    "Classes/src/XRC20/*.swift",
+    "Classes/src/XRC721/*.swift",
+    "Classes/src/Account/*.swift",
+    "Classes/src/Client/*.swift",
+    "Classes/src/Contract/*.swift",
+    "Classes/src/ENS/*.swift",
+    "Classes/src/Extensions/*.swift",
+    "Classes/src/Multicall/*.swift",
+    "Classes/src/XDCUtils/*.swift"
   ],
   "pod_target_xcconfig": {
     "SWIFT_INCLUDE_PATHS[sdk=iphonesimulator*]": "$(PODS_TARGET_SRCROOT)/Classes/lib/**",
