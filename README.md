@@ -49,7 +49,7 @@ Creating an instance of XRC20
 ```
 let xdcClient = XRC20.init(client: XDCClient(url: clientUrl!))
 ```
-Now, we can interact with the XRC20 methods as in XDC Network - SDK:iOS - Technical Document | XRC20
+Now, we can interact with the XRC20 methods
 ```
 xdcClient.decimal(tokenContract: XDCAddress(xdcAddress)) { (err, decimal) in
             DispatchQueue.main.async {
