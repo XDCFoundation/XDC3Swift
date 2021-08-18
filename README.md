@@ -125,7 +125,7 @@ let function = XRC20Functions.approve(contract: XDCAddress("Token address"), spe
 
 #### For increaseAllowance and decreaseAllowance we need an instance of XRC20 and private key of owner: 
  
-increaseAllowance(XifninAccount account, address token, address owner, address spender, uint256 subtractedValue)
+increaseAllowance(XDCAccount account, address token, address owner, address spender, uint256 subtractedValue)
 Automically increases the allowance granted to spender by the caller.
 
 This is an alternative to approve.
