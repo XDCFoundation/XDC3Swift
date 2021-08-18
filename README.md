@@ -23,21 +23,21 @@ bash
 ```
 $ pod install
 ```
-Getting Started Create an instance of XinfinAccount with a XinfinKeyStorage provider. This provides a wrapper around your key for use.
+Getting Started Create an instance of XDCAccount with a XDCKeyStorage provider. This provides a wrapper around your key for use.
 
 Swift
 ```
 Import XDC3Swift
 ```
-Creating a XinFin account
+Creating a XDC account
 ```
-let keyStorage = XinfinKeyLocalStorage()
-let account = try? XinfinAccount.create(keyStorage: keyStorage, keystorePassword: "MY_PASSWORD")
+let keyStorage = XDCKeyLocalStorage()
+let account = try? XDCAccount.create(keyStorage: keyStorage, keystorePassword: "MY_PASSWORD")
 ```
-Create an instance of XinfinClient. This will provide you access to a set of functions interacting with the blockchain.
+Create an instance of XDCClient. This will provide you access to a set of functions interacting with the blockchain.
 ```
 guard let clientUrl = URL(string: "https://apothem-or-mainnet-url") else { return }
-let client = XinfinClient(url: clientUrl)
+let client = XDCClient(url: clientUrl)
 ```
 You can then interact with the client methods, such as to get the current gas price:
 ```
@@ -47,11 +47,11 @@ client.eth_gasPrice { (error, currentPrice) in
 ```
 Creating an instance of XRC20
 ```
-let xinfinClient = XRC20.init(client: XinfinClient(url: clientUrl!))
+let xdcClient = XRC20.init(client: XDCClient(url: clientUrl!))
 ```
 Now, we can interact with the XRC20 methods as in XDC Network - SDK:iOS - Technical Document | XRC20
 ```
-xinfinClient.decimal(tokenContract: XinfinAddress(xinfinAddress)) { (err, decimal) in
+xdcClient.decimal(tokenContract: XDCAddress(xdcAddress)) { (err, decimal) in
             DispatchQueue.main.async {
                 self.Decimal.text = "Decimal : \(decimal!)"
                 print("Decimal : \(decimal!)")
@@ -60,11 +60,11 @@ xinfinClient.decimal(tokenContract: XinfinAddress(xinfinAddress)) { (err, decima
 ```
 Transfer XDC For transferring XDC from one account to another, we must have the private key of the sender address.
 ```
-let account = try! XinfinAccount.init(keyStorage: XinfinPrivateKeyStore(privateKey: "privateKey"))
+let account = try! XDCAccount.init(keyStorage: XDCPrivateKeyStore(privateKey: "privateKey"))
 ```
-We need to create an instance of XinfinTransaction with values we want to send to the account.
+We need to create an instance of XDCTransaction with values we want to send to the account.
 ```
-let tx = XinfinTransaction(from: nil, to: XinfinAddress(xinfinAddress), value: BigUInt(value), data: nil, nonce: 3, gasPrice: BigUInt(4000004), gasLimit: BigUInt(50005), chainId: 51)
+let tx = XDCTransaction(from: nil, to: XDCAddress(xdcAddress), value: BigUInt(value), data: nil, nonce: 3, gasPrice: BigUInt(4000004), gasLimit: BigUInt(50005), chainId: 51)
 ```
 Now, we need to call the eth_sendRawTransaction method.
 ```
@@ -78,35 +78,35 @@ We will receive one txHash which will include all data of the transaction.
 
 Creating an instance of XRC20
 ```
-let xinfinClient = XRC20.init(client: XinfinClient(url: URL(string: "rpc url")!))
+let xdcClient = XRC20.init(client: XDC(url: URL(string: "rpc url")!))
 ```
 
 Now, we can interact with the XRC20 read methods.
 
 name() → string Returns the name of the token.
 ```
-xinfinClient.name(tokenContract: XinfinAddress("Token address")) { (err, name) in
+xdcClient.name(tokenContract: XDCAddress("Token address")) { (err, name) in
                 print("Name of token : \(name!)")
         }
 ```        
 balanceOf(address token,address account) → uint256  Returns the amount of tokens owned by account.
 ```
-xinfinClient.balanceOf(tokenContract: XinfinAddress("Token address"), account: XinfinAddress("Token Holder Address")) { (error, balanceOf) in
+xdcClient.balanceOf(tokenContract: XDCAddress("Token address"), account: XDCAddress("Token Holder Address")) { (error, balanceOf) in
                print("balance of token wned by account : \(balanceOf)")
         }
   }
 ```
 ### XRC20 Write methods
 
-For write methods, we need to create an instance of XinfinClient and we need token owner private key
+For write methods, we need to create an instance of XDCClient and we need token owner private key
 ```
-let client = XinfinClient(url: URL(string: "rpc url")!)
-let account = try? XinfinAccount(keyStorage: XinfinPrivateKeyStore(privateKey: "owner private key"))
+let client = XDCClient(url: URL(string: "rpc url")!)
+let account = try? XDCAccount(keyStorage: XDCPrivateKeyStore(privateKey: "owner private key"))
 ```
 
 transfer(address token, address recipient, uint256 amount) → Moves amount tokens from the caller’s account to recipient. It will return a transaction hash.
 ```
-   let function = XRC20Functions.transfer(contract: XinfinAddress("Token address"), to: XinfinAddress("reciever address"), value: BigUInt(amount))
+   let function = XRC20Functions.transfer(contract: XDCAddress("Token address"), to: XDCAddress("reciever address"), value: BigUInt(amount))
         let transaction = (try? function.transaction(gasPrice: 35000, gasLimit: 30000))!
             client.eth_sendRawTransaction(transaction, withAccount: self.account!) { (error, txHash) in
             print("TX Hash: \(txHash ?? "")")
@@ -116,7 +116,7 @@ transfer(address token, address recipient, uint256 amount) → Moves amount toke
 approve(address token, address spender, uint256 amount) → Sets amount as the allowance of spender over the caller’s tokens. It will return a transaction hash.
 
 ```
-let function = XRC20Functions.approve(contract: XinfinAddress("Token address"), spender: XinfinAddress("Spender address"), value: val!)
+let function = XRC20Functions.approve(contract: XDCAddress("Token address"), spender: XDCAddress("Spender address"), value: val!)
         let transaction = (try? function.transaction(gasPrice: 35000, gasLimit: 30000))!
             self.client.eth_sendRawTransaction(transaction, withAccount: self.account!) { (error, txHash) in
             print("TX Hash: \(txHash ?? "")")   
@@ -133,7 +133,7 @@ This is an alternative to approve.
 Emits an Approval event indicating the updated allowance.
 
 ```
-xinfinClient.increaseAllowance(account: self.account!, tokenAddress: XinfinAddress("Token Address"), owner: XinfinAddress("Owner address"), spender: XinfinAddress("Spender address"), value: BigUInt(value), completion: { (txHash) in
+xdcClient.increaseAllowance(account: self.account!, tokenAddress: XDCAddress("Token Address"), owner: XDCAddress("Owner address"), spender: XDCAddress("Spender address"), value: BigUInt(value), completion: { (txHash) in
             print(txHash!)
     })
 ```    
