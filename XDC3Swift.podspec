@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'XDC3Swift'
-  s.version          = '1.2.1'
+  s.version          = '1.3.0'
   s.summary          = 'XinFin API for swift'
 
 # This description is used to generate tags and improve search results.
@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
      'SWIFT_INCLUDE_PATHS[sdk=iphoneos*]' => '$(PODS_TARGET_SRCROOT)/Classes/lib/**'
    }
    s.preserve_paths = 'Classes/lib/**/module.map'
-  
+   s.static_framework = true
   # s.resource_bundles = {
   #   'XDC3Swift' => ['XDC3Swift/Assets/*.png']
   # }
@@ -46,4 +46,5 @@ Pod::Spec.new do |s|
   s.dependency 'GenericJSON', '~> 2.0.0'
   s.dependency 'BigInt', '~> 5.2.0'
   s.dependency 'secp256k1.swift', '~> 0.1.0'
+  s.dependency 'HDWalletKit', '~> 0.3.6'
 end

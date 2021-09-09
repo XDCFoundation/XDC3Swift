@@ -1,22 +1,30 @@
 PODS:
   - BigInt (5.2.0)
+  - CryptoSwift (1.0.0)
   - GenericJSON (2.0.1)
+  - HDWalletKit (0.3.6):
+    - CryptoSwift (~> 1.0.0)
+    - secp256k1.swift (~> 0.1.4)
   - secp256k1.swift (0.1.4)
-  - XDC3Swift (1.1.0):
+  - XDC3Swift (1.2.1):
     - BigInt (~> 5.2.0)
     - GenericJSON (~> 2.0.0)
+    - HDWalletKit (~> 0.3.6)
     - secp256k1.swift (~> 0.1.0)
 
 DEPENDENCIES:
   - BigInt (~> 5.2.0)
   - GenericJSON (~> 2.0.0)
+  - HDWalletKit (~> 0.3.6)
   - secp256k1.swift (~> 0.1.0)
   - XDC3Swift (from `../`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - BigInt
+    - CryptoSwift
     - GenericJSON
+    - HDWalletKit
     - secp256k1.swift
 
 EXTERNAL SOURCES:
@@ -25,10 +33,12 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   BigInt: f668a80089607f521586bbe29513d708491ef2f7
+  CryptoSwift: d81eeaa59dc5a8d03720fe919a6fd07b51f7439f
   GenericJSON: a6e74e2c457f8693caab08e0eafde7d97e6666de
+  HDWalletKit: 6d97a15404b2edfe3418e3dc064faa967e51dac4
   secp256k1.swift: a7e7a214f6db6ce5db32cc6b2b45e5c4dd633634
-  XDC3Swift: c45e5dca1af105818b49488d9b1cd15220b28d92
+  XDC3Swift: cc50beec13c592a35b87079987023287938f7625
 
-PODFILE CHECKSUM: 03e193850ce6a6a59030c9a0b68cf12b3464221d
+PODFILE CHECKSUM: e1fb75b60b611428ec8bff54d5fd59cd5c77fda7
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.0.beta.1

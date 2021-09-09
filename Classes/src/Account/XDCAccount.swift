@@ -6,14 +6,15 @@
 //
 
 import Foundation
-
+import HDWalletKit
 protocol XDCAccountProtocol {
     var address: XDCAddress { get }
     
     // For Keystore handling
     init?(keyStorage: XDCKeyStorageProtocol, keystorePassword: String) throws
     static func create(keyStorage: XDCKeyStorageProtocol, keystorePassword password: String) throws -> XDCAccount
-    
+    static func createAccountWithMemonic() throws -> String
+    static func importAccountWithMnemonic(mnemonic: String) throws -> Account
     // For non-Keystore formats. This is not recommended, however some apps may wish to implement their own storage.
     init(keyStorage: XDCKeyStorageProtocol) throws
     
@@ -167,5 +168,19 @@ public class XDCAccount: XDCAccountProtocol {
         
         signed.append(last)
         return signed.xdc3.hexString
+    }
+    public static func createAccountWithMemonic() throws -> String{
+        let mnemonic = Mnemonic.create()
+        return mnemonic
+    }
+    
+    public static func importAccountWithMnemonic(mnemonic: String) throws -> Account{
+        let seed = Mnemonic.createSeed(mnemonic: mnemonic)
+        
+        let wallet  = Wallet(seed: seed, coin: .ethereum)
+       let account = wallet.generateAccount()
+      //  print(account.rawPrivateKey.addHexPrefix())
+      //  print(account.address)
+        return account
     }
 }

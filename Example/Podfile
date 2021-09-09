@@ -5,5 +5,5 @@ target 'XDC3Swift_Tests' do
   pod 'GenericJSON', '~> 2.0.0'
   pod 'BigInt', '~> 5.2.0'
   pod 'secp256k1.swift', '~> 0.1.0'
-  
+  pod 'HDWalletKit', '~> 0.3.6'
 end

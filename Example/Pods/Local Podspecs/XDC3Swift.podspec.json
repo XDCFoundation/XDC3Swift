@@ -1,6 +1,6 @@
 {
   "name": "XDC3Swift",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "summary": "XinFin API for swift",
   "description": "XinFin Swift API with support for smart contracts and XRC20",
   "homepage": "https://github.com/XinfinLeeway/XDC3Swift",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/XinfinLeeway/XDC3Swift.git",
-    "tag": "1.1.0"
+    "tag": "1.2.1"
   },
   "platforms": {
     "ios": "11.0"
@@ -27,9 +27,7 @@
     "Classes/src/Account/*.swift",
     "Classes/src/Client/*.swift",
     "Classes/src/Contract/*.swift",
-    "Classes/src/ENS/*.swift",
     "Classes/src/Extensions/*.swift",
-    "Classes/src/Multicall/*.swift",
     "Classes/src/XDCUtils/*.swift"
   ],
   "pod_target_xcconfig": {
@@ -37,6 +35,7 @@
     "SWIFT_INCLUDE_PATHS[sdk=iphoneos*]": "$(PODS_TARGET_SRCROOT)/Classes/lib/**"
   },
   "preserve_paths": "Classes/lib/**/module.map",
+  "static_framework": true,
   "dependencies": {
     "GenericJSON": [
       "~> 2.0.0"
@@ -46,6 +45,9 @@
     ],
     "secp256k1.swift": [
       "~> 0.1.0"
+    ],
+    "HDWalletKit": [
+      "~> 0.3.6"
     ]
   },
   "swift_version": "5.0"
