@@ -34,6 +34,7 @@
 		8B148DDF26BD4AF500C7BF0C /* Pods_XDC3Swift_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_XDC3Swift_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B148DE026BD4AF500C7BF0C /* secp256k1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = secp256k1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B148DE126BD4AF500C7BF0C /* XDC3Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = XDC3Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BE00EFB26F0EC7300AD9E70 /* ExampleXDC3Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleXDC3Swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C5B3A46BF26C3E6C3A6B6A7 /* Pods-XDC3Swift_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XDC3Swift_Tests.release.xcconfig"; path = "Target Support Files/Pods-XDC3Swift_Tests/Pods-XDC3Swift_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		ED31FB1B70CDAE595C4162A5 /* XDC3Swift.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = XDC3Swift.podspec; path = ../XDC3Swift.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -45,6 +46,13 @@
 			files = (
 				443BCAA0F09C68687F4A37F1 /* Pods_XDC3Swift_Tests.framework in Frameworks */,
 				A0DB11A27DA38E7B21A8A189 /* Pods_XDC3Swift_Tests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BE00EF826F0EC7300AD9E70 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACE51AFB9204008FA782 /* XDC3Swift_Tests.xctest */,
+				8BE00EFB26F0EC7300AD9E70 /* ExampleXDC3Swift.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -147,6 +156,23 @@
 			productReference = 607FACE51AFB9204008FA782 /* XDC3Swift_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		8BE00EFA26F0EC7300AD9E70 /* ExampleXDC3Swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BE00F0E26F0EC7500AD9E70 /* Build configuration list for PBXNativeTarget "ExampleXDC3Swift" */;
+			buildPhases = (
+				8BE00EF726F0EC7300AD9E70 /* Sources */,
+				8BE00EF826F0EC7300AD9E70 /* Frameworks */,
+				8BE00EF926F0EC7300AD9E70 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ExampleXDC3Swift;
+			productName = ExampleXDC3Swift;
+			productReference = 8BE00EFB26F0EC7300AD9E70 /* ExampleXDC3Swift.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -160,6 +186,10 @@
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						LastSwiftMigration = 0900;
+					};
+					8BE00EFA26F0EC7300AD9E70 = {
+						CreatedOnToolsVersion = 12.4;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -178,12 +208,20 @@
 			projectRoot = "";
 			targets = (
 				607FACE41AFB9204008FA782 /* XDC3Swift_Tests */,
+				8BE00EFA26F0EC7300AD9E70 /* ExampleXDC3Swift */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		607FACE31AFB9204008FA782 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BE00EF926F0EC7300AD9E70 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -250,6 +288,13 @@
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
 				8B148D4826BC2AE300C7BF0C /* XRC721Tests.swift in Sources */,
 				8B148D4526BC1F4000C7BF0C /* XRC20Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BE00EF726F0EC7300AD9E70 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +438,63 @@
 			};
 			name = Release;
 		};
+		8BE00F0C26F0EC7500AD9E70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ExampleXDC3Swift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leewayhertz.ExampleXDC3Swift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8BE00F0D26F0EC7500AD9E70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ExampleXDC3Swift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leewayhertz.ExampleXDC3Swift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -410,6 +512,15 @@
 			buildConfigurations = (
 				607FACF31AFB9204008FA782 /* Debug */,
 				607FACF41AFB9204008FA782 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8BE00F0E26F0EC7500AD9E70 /* Build configuration list for PBXNativeTarget "ExampleXDC3Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BE00F0C26F0EC7500AD9E70 /* Debug */,
+				8BE00F0D26F0EC7500AD9E70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
